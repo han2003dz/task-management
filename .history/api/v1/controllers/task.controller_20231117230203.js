@@ -131,8 +131,8 @@ module.exports.create = async (req, res) => {
   } catch (error) {
     res.json({
       code: 400,
-      message: "Tạo không thành công!",
-      error: error,
+      message: "Tạo thành công!",
+      data: data,
     });
   }
 };

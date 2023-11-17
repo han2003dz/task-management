@@ -132,7 +132,7 @@ module.exports.create = async (req, res) => {
     res.json({
       code: 400,
       message: "Tạo không thành công!",
-      error: error,
+      data: data,
     });
   }
 };

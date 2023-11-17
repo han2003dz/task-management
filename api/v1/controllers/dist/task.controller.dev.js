@@ -146,7 +146,8 @@ module.exports.changeStatus = function _callee3(req, res) {
       }
     }
   }, null, null, [[0, 13]]);
-};
+}; // [PATCH] /api/v1/tasks/change-multi
+
 
 module.exports.changeMulti = function _callee4(req, res) {
   var _req$body, ids, key, value;
@@ -204,4 +205,43 @@ module.exports.changeMulti = function _callee4(req, res) {
       }
     }
   }, null, null, [[0, 13]]);
+}; // [POST] /api/v1/tasks/create
+
+
+module.exports.create = function _callee5(req, res) {
+  var task, data;
+  return regeneratorRuntime.async(function _callee5$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.prev = 0;
+          task = new Task(req.body);
+          _context5.next = 4;
+          return regeneratorRuntime.awrap(task.save());
+
+        case 4:
+          data = _context5.sent;
+          res.json({
+            code: 200,
+            message: "Tạo thành công!",
+            data: data
+          });
+          _context5.next = 11;
+          break;
+
+        case 8:
+          _context5.prev = 8;
+          _context5.t0 = _context5["catch"](0);
+          res.json({
+            code: 400,
+            message: "Tạo không thành công!",
+            error: _context5.t0
+          });
+
+        case 11:
+        case "end":
+          return _context5.stop();
+      }
+    }
+  }, null, null, [[0, 8]]);
 };
