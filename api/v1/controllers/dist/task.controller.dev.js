@@ -4,7 +4,7 @@ var Task = require("../models/task.model"); //[GET] /api/v1/tasks
 
 
 module.exports.index = function _callee(req, res) {
-  var find, tasks;
+  var find, sort, tasks;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -16,16 +16,24 @@ module.exports.index = function _callee(req, res) {
           if (req.query.status) {
             find.status = req.query.status;
           } // end bộ lọc trạng thái
+          // sắp xếp theo tiêu chí
 
 
-          _context.next = 4;
-          return regeneratorRuntime.awrap(Task.find(find));
+          sort = {};
 
-        case 4:
+          if (req.query.sortKey && req.query.sortValue) {
+            sort[req.query.sortKey] = req.query.sortValue;
+          } // end sắp xếp theo tiêu chí
+
+
+          _context.next = 6;
+          return regeneratorRuntime.awrap(Task.find(find).sort(sort));
+
+        case 6:
           tasks = _context.sent;
           res.json(tasks);
 
-        case 6:
+        case 8:
         case "end":
           return _context.stop();
       }
