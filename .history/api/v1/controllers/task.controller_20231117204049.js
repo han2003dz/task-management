@@ -12,14 +12,7 @@ module.exports.index = async (req, res) => {
   if (req.query.status) {
     find.status = req.query.status;
   }
-  // end bộ lọc trạng thái
-
-  // search
-  const objectSearch = searchHelper(req.query);
-  if (objectSearch.regex) {
-    find.title = objectSearch.regex;
-  }
-  // end search
+  // end bộ lọc trạng thái\
 
   // pagination
   const countTasks = await Task.countDocuments(find);

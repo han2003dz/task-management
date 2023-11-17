@@ -1,10 +1,14 @@
 "use strict";
 
-var Task = require("../models/task.model"); //[GET] /api/v1/tasks
+var Task = require("../models/task.model");
+
+var paginationHelper = require("../../../helpers/pagination");
+
+var searchHelper = require("../../../helpers/search"); //[GET] /api/v1/tasks
 
 
 module.exports.index = function _callee(req, res) {
-  var find, sort, tasks;
+  var find, objectSearch, countTasks, objectPagination, sort, tasks;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -16,8 +20,27 @@ module.exports.index = function _callee(req, res) {
           if (req.query.status) {
             find.status = req.query.status;
           } // end bộ lọc trạng thái
-          // sắp xếp theo tiêu chí
+          // search
 
+
+          objectSearch = searchHelper(req.query);
+
+          if (objectSearch.regex) {
+            find.title = objectSearch.regex;
+          } // end search
+          // pagination
+
+
+          _context.next = 6;
+          return regeneratorRuntime.awrap(Task.countDocuments(find));
+
+        case 6:
+          countTasks = _context.sent;
+          objectPagination = paginationHelper({
+            currentPage: 1,
+            limitItems: 2
+          }, req.query, countTasks); // end pagination
+          // sắp xếp theo tiêu chí
 
           sort = {};
 
@@ -26,14 +49,14 @@ module.exports.index = function _callee(req, res) {
           } // end sắp xếp theo tiêu chí
 
 
-          _context.next = 6;
-          return regeneratorRuntime.awrap(Task.find(find).sort(sort));
+          _context.next = 12;
+          return regeneratorRuntime.awrap(Task.find(find).sort(sort).limit(objectPagination.limitItems).skip(objectPagination.skip));
 
-        case 6:
+        case 12:
           tasks = _context.sent;
           res.json(tasks);
 
-        case 8:
+        case 14:
         case "end":
           return _context.stop();
       }

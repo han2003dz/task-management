@@ -10,7 +10,6 @@ const app = express();
 const port = process.env.PORT;
 
 routesVer1(app);
-
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 });

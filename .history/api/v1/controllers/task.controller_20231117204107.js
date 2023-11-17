@@ -15,15 +15,12 @@ module.exports.index = async (req, res) => {
   // end bộ lọc trạng thái
 
   // search
-  const objectSearch = searchHelper(req.query);
-  if (objectSearch.regex) {
-    find.title = objectSearch.regex;
-  }
+  const o
   // end search
 
   // pagination
   const countTasks = await Task.countDocuments(find);
-  let objectPagination = paginationHelper(
+  let objectPagination = paginbjecationHelper(
     {
       currentPage: 1,
       limitItems: 2,

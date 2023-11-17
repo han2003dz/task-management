@@ -9,8 +9,7 @@ const routesVer1 = require("./api/v1/routes/index.route");
 const app = express();
 const port = process.env.PORT;
 
-routesVer1(app);
-
+ro
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 });
