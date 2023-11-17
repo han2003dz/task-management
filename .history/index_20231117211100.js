@@ -11,7 +11,7 @@ const routesVer1 = require("./api/v1/routes/index.route");
 const app = express();
 const port = process.env.PORT;
 
-app.use(bodyParser.json());
+app.use(bodyParser)
 
 routesVer1(app);
 

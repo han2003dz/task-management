@@ -71,15 +71,12 @@ module.exports.changeStatus = async (req, res) => {
         },
         { status: status }
       );
-      res.json({
-        code: 200,
-        message: "Cập nhật trạng thái thành công!",
-      });
-    } else {
-      res.json({
-        message: "Không tồn tại trạng thái này!",
-      });
     }
+
+    res.json({
+      code: 200,
+      message: "Cập nhật trạng thái thành công!",
+    });
   } catch (error) {
     res.json({
       code: 400,

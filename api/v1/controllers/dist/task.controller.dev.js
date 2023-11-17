@@ -88,4 +88,62 @@ module.exports.detail = function _callee2(req, res) {
       }
     }
   });
+}; // [PATCH] /api/v1/tasks/change-status/:id
+
+
+module.exports.changeStatus = function _callee3(req, res) {
+  var listStatus, id, status;
+  return regeneratorRuntime.async(function _callee3$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.prev = 0;
+          listStatus = ["initial", "finish", "doing", "unfinished"];
+          id = req.params.id;
+          status = req.body.status;
+
+          if (!listStatus.includes(status)) {
+            _context3.next = 10;
+            break;
+          }
+
+          _context3.next = 7;
+          return regeneratorRuntime.awrap(Task.updateOne({
+            _id: id
+          }, {
+            status: status
+          }));
+
+        case 7:
+          res.json({
+            code: 200,
+            message: "Cập nhật trạng thái thành công!"
+          });
+          _context3.next = 11;
+          break;
+
+        case 10:
+          res.json({
+            message: "Không tồn tại trạng thái này!"
+          });
+
+        case 11:
+          _context3.next = 16;
+          break;
+
+        case 13:
+          _context3.prev = 13;
+          _context3.t0 = _context3["catch"](0);
+          res.json({
+            code: 400,
+            message: "Cập nhật trạng thái không thành công!",
+            error: _context3.t0
+          });
+
+        case 16:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  }, null, null, [[0, 13]]);
 };
