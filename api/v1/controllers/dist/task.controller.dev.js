@@ -147,3 +147,61 @@ module.exports.changeStatus = function _callee3(req, res) {
     }
   }, null, null, [[0, 13]]);
 };
+
+module.exports.changeMulti = function _callee4(req, res) {
+  var _req$body, ids, key, value;
+
+  return regeneratorRuntime.async(function _callee4$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.prev = 0;
+          _req$body = req.body, ids = _req$body.ids, key = _req$body.key, value = _req$body.value;
+          _context4.t0 = key;
+          _context4.next = _context4.t0 === "status" ? 5 : 9;
+          break;
+
+        case 5:
+          _context4.next = 7;
+          return regeneratorRuntime.awrap(Task.updateMany({
+            _id: {
+              $id: ids
+            }
+          }, {
+            status: value
+          }));
+
+        case 7:
+          res.json({
+            code: 200,
+            message: "Cập nhật trạng thái thành công!"
+          });
+          return _context4.abrupt("break", 11);
+
+        case 9:
+          res.json({
+            code: 400,
+            message: "Không tồn tại!"
+          });
+          return _context4.abrupt("break", 11);
+
+        case 11:
+          _context4.next = 16;
+          break;
+
+        case 13:
+          _context4.prev = 13;
+          _context4.t1 = _context4["catch"](0);
+          res.json({
+            code: 400,
+            message: "Cập nhật thất bại!",
+            error: _context4.t1
+          });
+
+        case 16:
+        case "end":
+          return _context4.stop();
+      }
+    }
+  }, null, null, [[0, 13]]);
+};
