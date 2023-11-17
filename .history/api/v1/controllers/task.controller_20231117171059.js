@@ -6,12 +6,10 @@ module.exports.index = async (req, res) => {
     deleted: false,
   };
 
-  // bộ lọc trạng thái
-  if (req.query.status) {
-    find.status = req.query.status;
-  }
-  // end bộ lọc trạng thái
-  const tasks = await Task.find(find);
+  if(req.q)
+  const tasks = await Task.find({
+    deleted: false,
+  });
 
   res.json(tasks);
 };
