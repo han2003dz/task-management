@@ -1,6 +1,6 @@
 const express = require("express");
 require("dotenv").config();
-const cors = require("cors");
+const cors = require("c")
 const bodyParser = require("body-parser");
 
 const database = require("./config/database");
@@ -10,7 +10,6 @@ const routesVer1 = require("./api/v1/routes/index.route");
 
 const app = express();
 const port = process.env.PORT;
-app.use(cors());
 
 app.use(bodyParser.json());
 

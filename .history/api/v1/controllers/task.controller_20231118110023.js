@@ -102,21 +102,14 @@ module.exports.changeMulti = async (req, res) => {
           message: "Cập nhật trạng thái thành công!",
         });
         break;
-      case "deleted":
-        await Task.updateMany(
-          { _id: { $in: ids } },
-          { deleted: true, deletedAt: new Date() }
-        );
-        res.json({
-          code: 200,
-          message: "Xóa thành công!",
-        });
+      case "delete":
+        await Task.updateMany({_id: {}})
         break;
 
       default:
         res.json({
           code: 400,
-          message: "Không tồn tại trường dữ liệu này!",
+          message: "Không tồn tại!",
         });
         break;
     }

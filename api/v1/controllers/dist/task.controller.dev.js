@@ -159,7 +159,7 @@ module.exports.changeMulti = function _callee4(req, res) {
           _context4.prev = 0;
           _req$body = req.body, ids = _req$body.ids, key = _req$body.key, value = _req$body.value;
           _context4.t0 = key;
-          _context4.next = _context4.t0 === "status" ? 5 : 9;
+          _context4.next = _context4.t0 === "status" ? 5 : _context4.t0 === "deleted" ? 9 : 13;
           break;
 
         case 5:
@@ -177,21 +177,39 @@ module.exports.changeMulti = function _callee4(req, res) {
             code: 200,
             message: "Cập nhật trạng thái thành công!"
           });
-          return _context4.abrupt("break", 11);
+          return _context4.abrupt("break", 15);
 
         case 9:
-          res.json({
-            code: 400,
-            message: "Không tồn tại!"
-          });
-          return _context4.abrupt("break", 11);
+          _context4.next = 11;
+          return regeneratorRuntime.awrap(Task.updateMany({
+            _id: {
+              $in: ids
+            }
+          }, {
+            deleted: true,
+            deletedAt: new Date()
+          }));
 
         case 11:
-          _context4.next = 16;
-          break;
+          res.json({
+            code: 200,
+            message: "Xóa thành công!"
+          });
+          return _context4.abrupt("break", 15);
 
         case 13:
-          _context4.prev = 13;
+          res.json({
+            code: 400,
+            message: "Không tồn tại trường dữ liệu này!"
+          });
+          return _context4.abrupt("break", 15);
+
+        case 15:
+          _context4.next = 20;
+          break;
+
+        case 17:
+          _context4.prev = 17;
           _context4.t1 = _context4["catch"](0);
           res.json({
             code: 400,
@@ -199,12 +217,12 @@ module.exports.changeMulti = function _callee4(req, res) {
             error: _context4.t1
           });
 
-        case 16:
+        case 20:
         case "end":
           return _context4.stop();
       }
     }
-  }, null, null, [[0, 13]]);
+  }, null, null, [[0, 17]]);
 }; // [POST] /api/v1/tasks/create
 
 

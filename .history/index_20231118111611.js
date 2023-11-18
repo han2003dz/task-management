@@ -10,7 +10,6 @@ const routesVer1 = require("./api/v1/routes/index.route");
 
 const app = express();
 const port = process.env.PORT;
-app.use(cors());
 
 app.use(bodyParser.json());
 
