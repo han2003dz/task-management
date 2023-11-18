@@ -98,7 +98,7 @@ module.exports.changeStatus = function _callee3(req, res) {
       switch (_context3.prev = _context3.next) {
         case 0:
           _context3.prev = 0;
-          listStatus = ["initial", "finish", "doing", "unfinished"];
+          listStatus = ["initial", "finish", "doing", "unfinished", "pending"];
           id = req.params.id;
           status = req.body.status;
 
@@ -166,7 +166,7 @@ module.exports.changeMulti = function _callee4(req, res) {
           _context4.next = 7;
           return regeneratorRuntime.awrap(Task.updateMany({
             _id: {
-              $id: ids
+              $in: ids
             }
           }, {
             status: value
@@ -241,6 +241,87 @@ module.exports.create = function _callee5(req, res) {
         case 11:
         case "end":
           return _context5.stop();
+      }
+    }
+  }, null, null, [[0, 8]]);
+}; // [POST]/api/v1/tasks/edit/:id
+
+
+module.exports.edit = function _callee6(req, res) {
+  var id;
+  return regeneratorRuntime.async(function _callee6$(_context6) {
+    while (1) {
+      switch (_context6.prev = _context6.next) {
+        case 0:
+          _context6.prev = 0;
+          id = req.params.id;
+          _context6.next = 4;
+          return regeneratorRuntime.awrap(Task.updateOne({
+            _id: id
+          }, req.body));
+
+        case 4:
+          res.json({
+            code: 200,
+            message: "Cập nhật thành công!"
+          });
+          _context6.next = 10;
+          break;
+
+        case 7:
+          _context6.prev = 7;
+          _context6.t0 = _context6["catch"](0);
+          res.json({
+            code: 400,
+            message: "Lỗi!"
+          });
+
+        case 10:
+        case "end":
+          return _context6.stop();
+      }
+    }
+  }, null, null, [[0, 7]]);
+}; // [POST]/api/v1/tasks/delete/:id
+
+
+module.exports["delete"] = function _callee7(req, res) {
+  var id;
+  return regeneratorRuntime.async(function _callee7$(_context7) {
+    while (1) {
+      switch (_context7.prev = _context7.next) {
+        case 0:
+          _context7.prev = 0;
+          id = req.params.id;
+          console.log(id);
+          _context7.next = 5;
+          return regeneratorRuntime.awrap(Task.updateOne({
+            _id: id
+          }, {
+            deleted: true,
+            deletedAt: new Date()
+          }));
+
+        case 5:
+          res.json({
+            code: 200,
+            message: "Xóa thành công!"
+          });
+          _context7.next = 11;
+          break;
+
+        case 8:
+          _context7.prev = 8;
+          _context7.t0 = _context7["catch"](0);
+          res.json({
+            code: 400,
+            message: "Xóa thất bại!",
+            error: _context7.t0
+          });
+
+        case 11:
+        case "end":
+          return _context7.stop();
       }
     }
   }, null, null, [[0, 8]]);

@@ -161,7 +161,7 @@ module.exports.edit = async (req, res) => {
 module.exports.delete = async (req, res) => {
   try {
     const id = req.params.id;
-    console.log(id);
+
     await Task.updateOne(
       { _id: id },
       {
@@ -177,8 +177,7 @@ module.exports.delete = async (req, res) => {
   } catch (error) {
     res.json({
       code: 400,
-      message: "Xóa thất bại!",
-      error: error,
+      message: "Xóa thất bai!",
     });
   }
 };

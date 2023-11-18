@@ -7,6 +7,5 @@ router.get("/detail/:id", controller.detail);
 router.patch("/change-status/:id", controller.changeStatus);
 router.patch("/change-multi", controller.changeMulti);
 router.post("/create", controller.create);
-router.patch("/edit/:id", controller.edit);
-router.delete("/delete/:id", controller.delete);
+http://localhost:5000/api/v1/tasks?keyword=Công
 module.exports = router;

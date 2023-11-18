@@ -61,7 +61,7 @@ module.exports.detail = async (req, res) => {
 // [PATCH] /api/v1/tasks/change-status/:id
 module.exports.changeStatus = async (req, res) => {
   try {
-    const listStatus = ["initial", "finish", "doing", "unfinished", "pending"];
+    const listStatus = ["initial", "finish", "doing", "unfinished"];
     const id = req.params.id;
     const status = req.body.status;
     if (listStatus.includes(status)) {
@@ -93,16 +93,15 @@ module.exports.changeStatus = async (req, res) => {
 module.exports.changeMulti = async (req, res) => {
   try {
     const { ids, key, value } = req.body;
-
     switch (key) {
       case "status":
-        await Task.updateMany({ _id: { $in: ids } }, { status: value });
+        await Task.updateMany({ _id: { $id: ids } }, { status: value });
+
         res.json({
           code: 200,
           message: "Cập nhật trạng thái thành công!",
         });
         break;
-
       default:
         res.json({
           code: 400,
@@ -138,47 +137,14 @@ module.exports.create = async (req, res) => {
   }
 };
 
-// [POST]/api/v1/tasks/edit/:id
+// [POST/api/v1/tasks/edit/:id]
 module.exports.edit = async (req, res) => {
-  try {
-    const id = req.params.id;
+  const id = req.params.id;
+  await Task.updateOne({ _id: id }, req.body);
+  res.json({
+    code: 200,
+    m
+  })
 
-    await Task.updateOne({ _id: id }, req.body);
-
-    res.json({
-      code: 200,
-      message: "Cập nhật thành công!",
-    });
-  } catch (error) {
-    res.json({
-      code: 400,
-      message: "Lỗi!",
-    });
-  }
-};
-
-// [POST]/api/v1/tasks/delete/:id
-module.exports.delete = async (req, res) => {
-  try {
-    const id = req.params.id;
-    console.log(id);
-    await Task.updateOne(
-      { _id: id },
-      {
-        deleted: true,
-        deletedAt: new Date(),
-      }
-    );
-
-    res.json({
-      code: 200,
-      message: "Xóa thành công!",
-    });
-  } catch (error) {
-    res.json({
-      code: 400,
-      message: "Xóa thất bại!",
-      error: error,
-    });
-  }
+  res.json(task);
 };

@@ -161,24 +161,17 @@ module.exports.edit = async (req, res) => {
 module.exports.delete = async (req, res) => {
   try {
     const id = req.params.id;
-    console.log(id);
-    await Task.updateOne(
-      { _id: id },
-      {
-        deleted: true,
-        deletedAt: new Date(),
-      }
-    );
+
+    await Task.u({ _id: id }, req.body);
 
     res.json({
       code: 200,
-      message: "Xóa thành công!",
+      message: "Cập nhật thành công!",
     });
   } catch (error) {
     res.json({
       code: 400,
-      message: "Xóa thất bại!",
-      error: error,
+      message: "Lỗi!",
     });
   }
 };

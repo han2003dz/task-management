@@ -161,7 +161,7 @@ module.exports.edit = async (req, res) => {
 module.exports.delete = async (req, res) => {
   try {
     const id = req.params.id;
-    console.log(id);
+
     await Task.updateOne(
       { _id: id },
       {
