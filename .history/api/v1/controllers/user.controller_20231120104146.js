@@ -172,18 +172,5 @@ module.exports.resetPassword = async (req, res) => {
       code: 400,
       message: "Vui lòng nhập mật khẩu mới khác với mật khẩu cũ!",
     });
-    return;
   }
-
-  await User.updateOne(
-    {
-      token: token,
-    },
-    { password: md5(password) }
-  );
-
-  res.json({
-    code: 200,
-    message: "Đổi mật khẩu thành công!",
-  });
 };

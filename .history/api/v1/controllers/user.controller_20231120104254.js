@@ -184,6 +184,6 @@ module.exports.resetPassword = async (req, res) => {
 
   res.json({
     code: 200,
-    message: "Đổi mật khẩu thành công!",
-  });
+    message: ""
+  })
 };

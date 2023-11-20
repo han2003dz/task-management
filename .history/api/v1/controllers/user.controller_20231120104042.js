@@ -159,31 +159,10 @@ module.exports.resetPassword = async (req, res) => {
     deleted: false,
   });
 
-  if (!user) {
+  if(!user){
     res.json({
       code: 400,
-      message: "Tài khoản không tồn tại!",
-    });
-    return;
+      message: "Tài khoản không tồn tại!"
+    })
   }
-
-  if (md5(password) === user.password) {
-    res.json({
-      code: 400,
-      message: "Vui lòng nhập mật khẩu mới khác với mật khẩu cũ!",
-    });
-    return;
-  }
-
-  await User.updateOne(
-    {
-      token: token,
-    },
-    { password: md5(password) }
-  );
-
-  res.json({
-    code: 200,
-    message: "Đổi mật khẩu thành công!",
-  });
 };
