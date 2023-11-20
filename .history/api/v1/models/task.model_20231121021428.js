@@ -8,8 +8,7 @@ const taskSchema = new mongoose.Schema(
     timeFinish: Date,
     createdBy: String,
     listUsers: Array,
-    // supervisor: Array, người dám sát công việc
-    taskParentId: String,
+    // supervisor: Array, người dám sát
     deleted: {
       type: Boolean,
       default: false,
