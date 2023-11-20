@@ -188,11 +188,7 @@ module.exports.resetPassword = async (req, res) => {
   });
 };
 
-//[GET] /api/v1/users/detail
+//[GET] 
 module.exports.detail = async (req, res) => {
-  res.json({
-    code: 200,
-    message: "Thành công",
-    info: req.user,
-  });
-};
+
+}
