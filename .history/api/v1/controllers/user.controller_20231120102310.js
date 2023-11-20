@@ -89,8 +89,8 @@ module.exports.forgotPassword = async (req, res) => {
   // lấy otp
   const otp = generate.generateRandomNumber(6);
 
-  // xét thời gian nhập otp
-  const timeExpire = 10;
+  // sét thời gian nhập otp : 5 phút
+  const timeExpire = 5;
 
   const objectForgotPassword = {
     email: email,
@@ -126,6 +126,8 @@ module.exports.otpPassword = async (req, res) => {
     email: email,
     otp: otp,
   });
+
+  console.log(otp);
 
   if (!result) {
     res.json({

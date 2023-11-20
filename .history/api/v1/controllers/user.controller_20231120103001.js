@@ -89,7 +89,7 @@ module.exports.forgotPassword = async (req, res) => {
   // lấy otp
   const otp = generate.generateRandomNumber(6);
 
-  // xét thời gian nhập otp
+  // sét thời gian nhập otp : 5 phút
   const timeExpire = 10;
 
   const objectForgotPassword = {

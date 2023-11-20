@@ -78,6 +78,7 @@ module.exports.forgotPassword = async (req, res) => {
     deleted: false,
   });
 
+  console.log(user);
   if (!user) {
     res.json({
       code: 400,
@@ -89,8 +90,8 @@ module.exports.forgotPassword = async (req, res) => {
   // lấy otp
   const otp = generate.generateRandomNumber(6);
 
-  // xét thời gian nhập otp
-  const timeExpire = 10;
+  // sét thời gian nhập otp : 5 phút
+  const timeExpire = 5;
 
   const objectForgotPassword = {
     email: email,
@@ -101,7 +102,7 @@ module.exports.forgotPassword = async (req, res) => {
   // lưu vào database
   const forgotPassword = new ForgotPassword(objectForgotPassword);
 
-  forgotPassword.save();
+  await forgotPassword.save();
 
   // gửi otp qua email
   const subject = "Mã OTP xác minh lấy lại mật khẩu";
@@ -126,6 +127,8 @@ module.exports.otpPassword = async (req, res) => {
     email: email,
     otp: otp,
   });
+
+  console.log(result);
 
   if (!result) {
     res.json({
