@@ -199,12 +199,12 @@ module.exports.detail = async (req, res) => {
 
 // [GET] /api/v1/users/list
 module.exports.listUsers = async (req, res) => {
-  const users = await User.find({
+  const user = await User.find({
     deleted: false,
   }).select("fullName email");
   res.json({
     code: 200,
     message: "Thành công!",
-    users: users,
+    user: user,
   });
 };
