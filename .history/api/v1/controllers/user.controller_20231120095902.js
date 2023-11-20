@@ -3,7 +3,7 @@ const ForgotPassword = require("../models/forgot-password.model");
 
 const md5 = require("md5");
 const generate = require("../../../helpers/generate");
-const sendMailHelper = require("../../../helpers/sendMail");
+const sendMail = require("../../../helpers/sendMail");
 
 module.exports.register = async (req, res) => {
   const existEmail = await User.findOne({
@@ -105,10 +105,10 @@ module.exports.forgotPassword = async (req, res) => {
     Mã OTP để lấy lại mật khẩu của bạn là <b>${otp}</b> (Sử dụng trong ${timeExpire} phút).
     Vui lòng không chia sẻ mã OTP này với bất kỳ ai.
   `;
-  sendMailHelper.sendMail(email, subject, html);
+  sendMail.sendMail(email, subject, html);
 
   res.json({
     code: 200,
-    message: "Đã gửi mã otp để lấy lại mật khẩu thành công!",
+    message: "Đã gửi mã otp",
   });
 };
