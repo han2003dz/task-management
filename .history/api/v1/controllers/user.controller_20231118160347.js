@@ -55,10 +55,5 @@ module.exports.login = async (req, res) => {
       message: "Sai mật khẩu!",
     });
   }
-  const token = user.token;
-  res.json({
-    code: 200,
-    message: "Đăng nhập thành công!",
-    token: token,
-  });
+  
 };

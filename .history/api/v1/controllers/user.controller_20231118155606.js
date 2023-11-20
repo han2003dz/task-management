@@ -41,24 +41,4 @@ module.exports.login = async (req, res) => {
     email: email,
     deleted: false,
   });
-
-  if (!user) {
-    res.json({
-      code: 400,
-      message: "Email chưa được đăng ký!",
-    });
-  }
-
-  if (md5(password) !== user.password) {
-    res.json({
-      code: 400,
-      message: "Sai mật khẩu!",
-    });
-  }
-  const token = user.token;
-  res.json({
-    code: 200,
-    message: "Đăng nhập thành công!",
-    token: token,
-  });
 };
